@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App renders 1`] = `
-<p>
-  heyho
-</p>
+<UNDEFINED>
+  <Waiting
+    loading={false}
+  />
+  <button
+    onClick={[Function]}
+  >
+    start fetching
+  </button>
+</UNDEFINED>
 `;
