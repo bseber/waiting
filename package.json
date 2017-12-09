@@ -29,7 +29,11 @@
         "dev": "NODE_ENV=development webpack-dev-server",
         "test": "jest"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bseber/waiting.git"
+    },
     "keywords": [],
-    "author": "",
+    "author": "Benjamin Seber <bennyseber@gmail.com>",
     "license": "MIT"
 }
