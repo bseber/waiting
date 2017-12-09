@@ -11,14 +11,15 @@ export default class App extends React.Component {
     state = App.initialState;
 
     componentDidMount() {
-        window.setTimeout(() => {
+        this._updateTimeout = window.setTimeout(() => {
             this.setState({ loading: false, data: ["Bruce", "Clark"] });
         }, 1000);
     }
 
     handleFetch(event) {
         this.setState({ loading: true, data: null });
-        window.setTimeout(() => {
+        window.clearTimeout(this._updateTimeout);
+        this._updateTimeout = window.setTimeout(() => {
             this.setState({ loading: false, data: ["Bruce", "Clark"] });
         }, this.state.timeout);
     }
@@ -33,8 +34,7 @@ export default class App extends React.Component {
             <React.Fragment>
                 <button onClick={event => this.handleFetch(event)}>start fetching with timeout (ms):</button>
                 <input type="number" value={timeout} onChange={event => this.handleTimeoutChange(event)} />
-                <Waiting loading={loading} />
-                {data && <ul>{data.map(hero => <li key={hero}>{hero}</li>)}</ul>}
+                <Waiting loading={loading} render={() => <ul>{data.map(hero => <li key={hero}>{hero}</li>)}</ul>} />
             </React.Fragment>
         );
     }

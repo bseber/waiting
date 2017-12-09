@@ -3,11 +3,12 @@ import React from "react";
 export default class Waiting extends React.Component {
     static defaultProps = {
         loading: true,
+        render: () => null,
     };
 
     constructor(props) {
         super();
-        this.state = { loading: props.loading };
+        this.state = { loading: props.loading, content: null };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -23,7 +24,21 @@ export default class Waiting extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.updateContent();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.loading !== prevState.loading) {
+            this.updateContent();
+        }
+    }
+
+    updateContent() {
+        this.setState({ content: this.state.loading ? <div>loading...</div> : this.props.render() });
+    }
+
     render() {
-        return this.state.loading ? <div>loading...</div> : null;
+        return this.state.content;
     }
 }

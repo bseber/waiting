@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Waiting invokes render property to render content 1`] = `
+<ul>
+  <li>
+    bruce
+  </li>
+  <li>
+    clark
+  </li>
+</ul>
+`;
+
 exports[`Waiting renders default 1`] = `
 <div>
   loading...

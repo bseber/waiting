@@ -14,6 +14,7 @@ exports[`App renders 1`] = `
   />
   <Waiting
     loading={true}
+    render={[Function]}
   />
 </UNDEFINED>
 `;

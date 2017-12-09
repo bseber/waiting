@@ -6,8 +6,9 @@ jest.useFakeTimers();
 
 describe("Waiting", () => {
     it("renders default", () => {
-        const tree = renderShallow(<Waiting />);
-        expect(tree).toMatchSnapshot();
+        const root = document.createElement("div");
+        renderIntoDocument(<Waiting />, root);
+        expect(root.firstChild).toMatchSnapshot();
     });
 
     it("renders null for loading=false", () => {
@@ -40,5 +41,22 @@ describe("Waiting", () => {
         // no "jest.runTimersToTime(99);" on purpose
         // since loading info should be removed at once
         expect(root.textContent).toBe("");
+    });
+
+    it("invokes render property to render content", () => {
+        const root = document.createElement("div");
+        renderIntoDocument(
+            <Waiting
+                loading={false}
+                render={() => (
+                    <ul>
+                        <li>bruce</li>
+                        <li>clark</li>
+                    </ul>
+                )}
+            />,
+            root,
+        );
+        expect(root.firstChild).toMatchSnapshot();
     });
 });
