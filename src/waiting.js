@@ -8,37 +8,40 @@ export default class Waiting extends React.Component {
 
     constructor(props) {
         super();
-        this.state = { loading: props.loading, content: null };
+        this.state = { loading: props.loading, inDecision: false };
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.loading !== this.props.loading) {
             window.clearTimeout(this._loadingTimeout);
             if (nextProps.loading) {
+                this.setState({ inDecision: true });
                 this._loadingTimeout = window.setTimeout(() => {
-                    this.setState({ loading: nextProps.loading });
+                    this.setState({
+                        loading: nextProps.loading,
+                        inDecision: false,
+                    });
                 }, 100);
             } else {
-                this.setState({ loading: false });
+                this.setState({
+                    loading: false,
+                    inDecision: false,
+                });
             }
         }
     }
 
-    componentDidMount() {
-        this.updateContent();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.loading !== prevState.loading) {
-            this.updateContent();
+    renderContent() {
+        if (this.state.inDecision) {
+            return null;
+        } else if (this.state.loading) {
+            return <div>loading...</div>;
+        } else {
+            return this.props.render();
         }
     }
 
-    updateContent() {
-        this.setState({ content: this.state.loading ? <div>loading...</div> : this.props.render() });
-    }
-
     render() {
-        return this.state.content;
+        return this.renderContent();
     }
 }
