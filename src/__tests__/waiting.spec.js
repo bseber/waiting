@@ -29,4 +29,16 @@ describe("Waiting", () => {
         jest.runOnlyPendingTimers();
         expect(root.textContent).toBe("");
     });
+
+    it("does not delay rendering when loading flag is toggled to 'false'", () => {
+        const root = document.createElement("div");
+
+        renderIntoDocument(<Waiting loading={true} />, root);
+        expect(root.textContent).toBe("loading...");
+
+        renderIntoDocument(<Waiting loading={false} />, root);
+        // no "jest.runTimersToTime(99);" on purpose
+        // since loading info should be removed at once
+        expect(root.textContent).toBe("");
+    });
 });

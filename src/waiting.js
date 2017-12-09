@@ -13,9 +13,13 @@ export default class Waiting extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.loading !== this.props.loading) {
             window.clearTimeout(this._loadingTimeout);
-            this._loadingTimeout = window.setTimeout(() => {
-                this.setState({ loading: nextProps.loading });
-            }, 100);
+            if (nextProps.loading) {
+                this._loadingTimeout = window.setTimeout(() => {
+                    this.setState({ loading: nextProps.loading });
+                }, 100);
+            } else {
+                this.setState({ loading: false });
+            }
         }
     }
 
