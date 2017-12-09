@@ -3,12 +3,18 @@ import Waiting from "./waiting";
 
 export default class App extends React.Component {
     static initialState = {
-        loading: false,
+        loading: true,
         data: null,
         timeout: 2500,
     };
 
     state = App.initialState;
+
+    componentDidMount() {
+        window.setTimeout(() => {
+            this.setState({ loading: false, data: ["Bruce", "Clark"] });
+        }, 1000);
+    }
 
     handleFetch(event) {
         this.setState({ loading: true, data: null });

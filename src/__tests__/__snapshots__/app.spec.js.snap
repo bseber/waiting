@@ -13,7 +13,7 @@ exports[`App renders 1`] = `
     value={2500}
   />
   <Waiting
-    loading={false}
+    loading={true}
   />
 </UNDEFINED>
 `;

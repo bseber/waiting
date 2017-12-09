@@ -3,7 +3,6 @@ import { renderShallow, renderIntoDocument } from "../../test/testHelpers";
 import Waiting from "../waiting";
 
 jest.useFakeTimers();
-const stringContaining = expect.stringContaining;
 
 describe("Waiting", () => {
     it("renders default", () => {
@@ -20,14 +19,14 @@ describe("Waiting", () => {
         const root = document.createElement("div");
 
         renderIntoDocument(<Waiting loading={false} />, root);
-        expect(root.innerHTML).toBe("");
+        expect(root.textContent).toBe("");
 
         renderIntoDocument(<Waiting loading={true} />, root);
         jest.runTimersToTime(99);
-        expect(root.innerHTML).toBe("");
+        expect(root.textContent).toBe("");
 
         renderIntoDocument(<Waiting loading={false} />, root);
         jest.runOnlyPendingTimers();
-        expect(root.innerHTML).toBe("");
+        expect(root.textContent).toBe("");
     });
 });

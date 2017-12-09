@@ -17,6 +17,9 @@ describe("App", () => {
         const root = document.createElement("div");
         const tree = renderIntoDocument(<App />, root);
         const waiting = ReactTestUtils.findRenderedComponentWithType(tree, Waiting);
+        // default state is currently loading
+        // therfore we're jumping into the future now
+        jest.runAllTimers();
 
         expect(waiting.props.loading).toBe(false);
 
