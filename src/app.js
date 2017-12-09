@@ -25,10 +25,10 @@ export default class App extends React.Component {
         const { loading, data, timeout } = this.state;
         return (
             <React.Fragment>
-                <Waiting loading={loading} />
-                {data && <ul>{data.map(hero => <li key={hero}>{hero}</li>)}</ul>}
                 <button onClick={event => this.handleFetch(event)}>start fetching with timeout (ms):</button>
                 <input type="number" value={timeout} onChange={event => this.handleTimeoutChange(event)} />
+                <Waiting loading={loading} />
+                {data && <ul>{data.map(hero => <li key={hero}>{hero}</li>)}</ul>}
             </React.Fragment>
         );
     }
