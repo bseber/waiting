@@ -3,6 +3,13 @@
 exports[`App renders 1`] = `
 <UNDEFINED>
   <button
+    id="cachedButton"
+    onClick={[Function]}
+  >
+    new data withoud loading (e.g. cached data)
+  </button>
+  <button
+    id="fetchButton"
     onClick={[Function]}
   >
     start fetching with timeout (ms):

@@ -23,7 +23,7 @@ describe("App", () => {
 
         expect(waiting.props.loading).toBe(false);
 
-        const button = root.querySelector("button");
+        const button = root.querySelector("#fetchButton");
         Simulate.click(button);
 
         expect(waiting.props.loading).toBe(true);

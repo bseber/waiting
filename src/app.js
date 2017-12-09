@@ -24,6 +24,10 @@ export default class App extends React.Component {
         }, this.state.timeout);
     }
 
+    handleCachedData(event) {
+        this.setState({ loading: false, data: ["apple", "banana", "pear"] });
+    }
+
     handleTimeoutChange(event) {
         this.setState({ timeout: event.target.value });
     }
@@ -32,7 +36,12 @@ export default class App extends React.Component {
         const { loading, data, timeout } = this.state;
         return (
             <React.Fragment>
-                <button onClick={event => this.handleFetch(event)}>start fetching with timeout (ms):</button>
+                <button id="cachedButton" onClick={event => this.handleCachedData(event)}>
+                    new data withoud loading (e.g. cached data)
+                </button>
+                <button id="fetchButton" onClick={event => this.handleFetch(event)}>
+                    start fetching with timeout (ms):
+                </button>
                 <input type="number" value={timeout} onChange={event => this.handleTimeoutChange(event)} />
                 <Waiting loading={loading} render={() => <ul>{data.map(hero => <li key={hero}>{hero}</li>)}</ul>} />
             </React.Fragment>
