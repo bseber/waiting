@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Waiting delays loading info on component instantiation 1`] = `
+<div>
+  loading...
+</div>
+`;
+
 exports[`Waiting invokes render property to render content 1`] = `
 <ul>
   <li>
@@ -9,10 +15,4 @@ exports[`Waiting invokes render property to render content 1`] = `
     clark
   </li>
 </ul>
-`;
-
-exports[`Waiting renders default 1`] = `
-<div>
-  loading...
-</div>
 `;

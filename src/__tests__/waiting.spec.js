@@ -5,10 +5,31 @@ import Waiting from "../waiting";
 jest.useFakeTimers();
 
 describe("Waiting", () => {
-    it("renders default", () => {
+    it("delays loading info on component instantiation", () => {
         const root = document.createElement("div");
         renderIntoDocument(<Waiting />, root);
+
+        jest.runTimersToTime(99);
+        expect(root.firstChild).toBeNull();
+
+        jest.runTimersToTime(1);
         expect(root.firstChild).toMatchSnapshot();
+    });
+
+    it("clears componentDidMount timer on property change", () => {
+        const root = document.createElement("div");
+        renderIntoDocument(<Waiting />, root);
+
+        jest.runTimersToTime(50);
+        expect(root.firstChild).toBeNull();
+
+        renderIntoDocument(<Waiting loading={false} render={() => <span>content</span>} />, root);
+
+        // skip 'componentDidMount' delay
+        jest.runOnlyPendingTimers();
+        // loading info should not be rendered anymore
+        // since loading flag has been toggled to false within the 100ms gap
+        expect(root.innerHTML).toEqual('<span>content</span>');
     });
 
     it("renders null for loading=false", () => {
@@ -35,6 +56,7 @@ describe("Waiting", () => {
         const root = document.createElement("div");
 
         renderIntoDocument(<Waiting loading={true} render={() => "-1-"} />, root);
+        jest.runTimersToTime(100);
         expect(root.textContent).toBe("loading...");
 
         renderIntoDocument(<Waiting loading={false} render={() => "-2-"} />, root);

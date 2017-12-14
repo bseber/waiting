@@ -8,7 +8,10 @@ export default class Waiting extends React.Component {
 
     constructor(props) {
         super();
-        this.state = { loading: props.loading, inDecision: false };
+        this.state = {
+            loading: props.loading,
+            inDecision: props.loading,
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -28,6 +31,17 @@ export default class Waiting extends React.Component {
                     inDecision: false,
                 });
             }
+        }
+    }
+
+    componentDidMount() {
+        if (this.state.inDecision) {
+            this._loadingTimeout = window.setTimeout(() => {
+                this.setState({
+                    loading: true,
+                    inDecision: false,
+                });
+            }, 100);
         }
     }
 
